@@ -52,14 +52,11 @@ public class ScreenActivity extends Activity {
         Buttons[16] = findViewById(R.id.clear);
 
         ToggleButton toggleButton = findViewById(R.id.theme_mode);
-        toggleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(toggleButton.isChecked()){
-                    findViewById(R.id.background).setBackgroundResource(R.drawable.calc_bg_night_);
-                }else{
-                    findViewById(R.id.background).setBackgroundResource(R.drawable.calc_bg);
-                }
+        toggleButton.setOnClickListener(v -> {
+            if(toggleButton.isChecked()){
+                findViewById(R.id.background).setBackgroundResource(R.drawable.calc_bg_night_);
+            }else{
+                findViewById(R.id.background).setBackgroundResource(R.drawable.calc_bg);
             }
         });
         calc_text = findViewById(R.id.textView);
