@@ -3,23 +3,51 @@ package com.example.mycalculator.misc;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class to convert and calculate expressions using stack.<p>
+ * Uses the {@link CalcStack custom stack} class to perform operations for <i>MyCalculator</i>.
+ *
+ * @author Harsh Indoria
+ *
+ * @see java.util.Stack
+ */
 public class StackEval {
     private final CalcStack stack;
     /**
-     *
+     * A {@link List} is used to store the Infix expression.
+     * Using a list allows us to store numbers that have more than 1 digit and allow for larger
+     * calculations.
      */
     private final List<String> INFIX_EXPR;
 
+    /**
+     * Constructor that takes no arguments.<p>
+     * Initializes the {@link CalcStack stack} and {@link List INFIX_EXPR} variable. <p>
+     *
+     */
     public StackEval(){
         stack = new CalcStack();
         INFIX_EXPR = new ArrayList<>();
     }
 
-    private int Prec(String c){
+    /**
+     * Private method that checks for the precedence of the operators.
+     * Takes in a {@code String} that checks for the precedence of the operators in accordance with standard
+     * mathematics.<p>
+     *
+     * @param c String that ideally contains operands or operators.
+     * @return The value of precedence. Higher the value, the more priority the operator is given.
+     */
+    private int Precedence(String c){
         if(c.equals("+") || c.equals("-")) return 1;
         else if (c.equals("/") || c.equals("*")) return 2;
         else return -1;
     }
+
+    /**
+     * Converts the standard {@code String} to {@link List list} styled expression.<p>
+     * @param str Ideally contains the expression that has to be converted
+     */
     public void setINFIX_EXPR(String str){
         INFIX_EXPR.clear();
         StringBuilder stringBuilder = new StringBuilder();
@@ -34,19 +62,15 @@ public class StackEval {
                stringBuilder.delete(0,stringBuilder.length());
                INFIX_EXPR.add(String.valueOf(str.charAt(i)));
            }
-
-            /*int j = i;
-            StringBuilder stringBuilder = new StringBuilder();
-            while(str.charAt(j) != '+' && str.charAt(j) != '-' && str.charAt(j) !='*' && str.charAt(j) !='/'){
-                stringBuilder.append(str.charAt(j));
-                j++;
-            }
-            if(stringBuilder.equals(""))
-            INFIX_EXPR.add(String.valueOf(str.charAt(j)));
-            else
-                INFIX_EXPR.add(stringBuilder.toString()); */
         }
     }
+
+    /**
+     * Converts the stored Infix expression to Postfix expression.<p>
+     * Uses the class variable {@link #INFIX_EXPR INFIX_EXPR} and converts it to Postfix.
+     * <p>
+     * @return {@code List} that contains the Postfix expression
+     */
     public List<String> infixToPostfix(){
         List<String> result = new ArrayList<>();
         for (int i = 0; i < INFIX_EXPR.size(); i++){
@@ -56,7 +80,7 @@ public class StackEval {
                 result.add(s);
             }
             else {
-                while (!stack.isEmpty() && Prec(s) < Prec(stack.peek())){
+                while (!stack.isEmpty() && Precedence(s) < Precedence(stack.peek())){
                     result.add(stack.pop());
                 }
                 stack.push(s);
@@ -67,6 +91,12 @@ public class StackEval {
         }
         return result;
     }
+
+    /**
+     * Evaluates the passed Postfix expression and returns it as a float.
+     * @param result The postfix expression that has to be calculated.
+     * @return evaluated postfix expression as {@code float}
+     */
     public float evalPostfix(List<String> result){
         stack.clearStack();
         for(int i = 0; i < result.size(); i++){

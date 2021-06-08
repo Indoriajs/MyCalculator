@@ -7,14 +7,14 @@ import java.util.List;
  * CalcStack - Custom stack created specifically for <em>MyCalculator</em>.
  * The stack uses {@link List} instead of the standard {@code Array[]} to perform
  * the basic operations of stack.
- *
+ *<p></p>
  * CalcStack provides basic stack operations like {@link #push(String) push(String)}, {@link #pop() pop()}, {@link #peek() peek()}.
  * Additionally, the user can also check whether the stack is {@code Empty} by using the
  * {@link #isEmpty() isEmpty()} method.
- *
+ *<p></p>
  * A constructor with no arguments is called to initialize the {@link List}
  * and {@code int} that acts as a placeholder for the stack's <b>TOP</b>.
- *
+ *<p></p>
  * @author Harsh Indoria
  * @see java.util.Stack
  */

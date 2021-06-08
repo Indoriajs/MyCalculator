@@ -2,16 +2,12 @@ package com.example.mycalculator.activities;
 
 
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
 import com.example.mycalculator.R;
 import com.example.mycalculator.misc.StackEval;
